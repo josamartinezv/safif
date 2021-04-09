@@ -1,0 +1,70 @@
+.error{
+    color: red;
+    }
+
+.advice{
+    color: #E66B01
+    }
+
+    @media screen and (max-width: 600px) {
+       table {
+           width:100%;
+       }
+       thead {
+           display: none;
+       }
+       tr:nth-of-type(2n) {
+           background-color: inherit;
+       }
+       tr td:first-child {
+           background: #f0f0f0;
+           font-weight:bold;
+           font-size:1.3em;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+       tbody td:before {
+           content: attr(data-th);
+           display: block;
+           text-align:center;
+       }
+}
+
+.mat-raised-button {
+    color: white;
+    background-color: gray;
+    outline: none;
+}
+
+.form-group:focus {
+    outline: 0px;
+    }
+
+.mat-icon-button{
+    outline: none;
+    }
+//Caracteres faltantes
+    body { font: 12px arial; }
+label { display: block; }
+input {
+  box-sizing: border-box;
+  margin: 5px 0 15px 0;
+  padding: 5px;
+  width: 100%;
+
+}
+textarea {
+  box-sizing: border-box;
+  font: 12px arial;
+  height: 200px;
+  margin: 5px 0 15px 0;
+  padding: 5px 2px;
+  width: 100%;
+}
+.borderojo {
+  outline: none;
+  border: 1px solid #f00;
+}
+.bordegris { border: 1px solid #d4d4d; }

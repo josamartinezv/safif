@@ -1,0 +1,103 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Padauk&display=swap" rel="stylesheet">
+
+
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col">
+                <h1 class="fond-weight-bold text-center h1">Modificar llamado de atención</h1>
+            </div>
+        </div>
+        <!--form [formGroup]="searchForm" (click)="getVerbalCalled()">
+
+   <!-- <form [formGroup]="searchForm" (click)="getVerbalCalled()">
+
+     <div class="form-group col-md-3">
+
+            <label> Aprendiz</label>
+            <select class="form-control" name="documentNumber" formControlName="documentNumber">
+
+                <option [value]="1113645001">Daniel Sebastián Cuaichar Pulido</option>
+                <option [value]="1113645024">Francisco Alejandro Henao</option>
+                <option [value]="16885496">José Alfredo Martínez Valdés</option>
+                <option [value]="168854503">Fabian Esteban Ruales</option>
+                <option [value]="1113679108">Sebastian Saavedra</option>
+                <option [value]="1113645025">Sebas Peres</option>
+              </select>
+
+        </div>
+
+
+
+    </form>-->
+        <div>
+            <div class="table-responsive">
+                <table class="table" class="table table-hover">
+
+
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Ficha</th>
+                            <th scope="col">Documento Aprendiz</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Tramite de solicitud</th>
+                            <th scope="col">Fase proyecto</th>
+                            <th scope="col">Tipo de llamado</th>
+                            <!-- <th scope="col">Documento Instructor</th> -->
+                            <th scope="col">Instructor</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Visualizar</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of verbalList">
+                            <td>{{item.programNumber.number}}</td>
+                            <td>{{item.aprentice.documentNumber}}</td>
+                            <td>{{item.aprentice.detailUser.name}} {{item.aprentice.detailUser.lastName}}</td>
+                            <td>{{item.dateCalled | date:'dd/MMM/yy h:mm:ss a'}}</td>
+                            <td>
+                                <span *ngIf="item.procedure">No Diligenciado</span>
+                                <span *ngIf="!item.procedure">Diligenciado</span>
+                            </td>
+                            <td>{{item.phaseVerbalCalled}}</td>
+                            <td>{{item.typeVerbalCalled}}</td>
+                            <!-- <td>{{item.documentNumberInstructor}}</td> -->
+                            <td>{{item.instructor.detailUser.name}} {{item.instructor.detailUser.lastName}}</td>
+                            <td><button mat-icon-button aria-label="Example icon button with a pen" [routerLink]="['../verbal-a-update',item.idVerbalCalled]" [disabled]="!item.state">
+                                <mat-icon>edit</mat-icon>
+                            </button></td>
+                            <td>
+                                <button *ngIf="item.state" mat-icon-button aria-label="Example icon button with a eye" [routerLink]="['../verbal-a-view',item.idVerbalCalled]" [disabled]="item.state">
+                                <mat-icon>visibility_off</mat-icon>
+                            </button>
+                                <button *ngIf="!item.state" mat-icon-button aria-label="Example icon button with a eye" [routerLink]="['../verbal-a-view',item.idVerbalCalled]" [disabled]="item.state">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            </td>
+                            <td>
+                                <span *ngIf="item.state"><mat-icon>lock_open</mat-icon></span>
+                                <span *ngIf="!item.state"><mat-icon>lock</mat-icon></span>
+                            </td>
+                            <!--td>
+                            <p-inputSwitch (onChange)="switchState(item)" name="procedure" name="state"  [(ngModel)]="item.procedure" [(ngModel)]="item.state"></p-inputSwitch>
+                        </td-->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPagenation($event)"></p-paginator>
+                    </div>
+                </div>
+                <!--div class="row">
+
+        <hr>
+        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="getVerbalCalled($event)"></p-paginator>
+
+
+    </div-->
+            </div>
+        </div>
+    </div>

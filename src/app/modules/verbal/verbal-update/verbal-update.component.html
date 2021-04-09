@@ -1,0 +1,117 @@
+<div class="container" class="bg-succes row align-items-center justify-content-center">
+
+    <div class="card bg-light mb-3" style="max-width: 30rem;">
+        <div class="card-header">Informar actividad de recuperación</div><br>
+
+        <form [formGroup]="searchForm" (ngSubmit)="confirm()">
+
+            <div *ngIf="verbalList">
+                <div class="form-group col-md-12">
+                    <div *ngIf="verbalList">
+                        <label>Información Instructor</label>
+                        <select class="custom-select" multiple disabled>
+                            <option>Nombres: {{verbalList.instructor.name}} {{verbalList.instructor.lastName}}</option>
+                            <option>Documento: {{verbalList.instructor.documentNumber}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <div *ngIf="verbalList">
+                        <label>Información Aprendiz</label>
+                        <select class="custom-select" multiple disabled>
+                            <option>Nombres: {{verbalList.aprentice.name}} {{verbalList.aprentice.lastName}}</option>
+                            <option>Documento: {{verbalList.aprentice.documentNumber}}</option>
+                            <option>Ficha: {{verbalList.programNumber.number}}</option>
+                            <option>Correo misena: {{verbalList.aprentice.emailSena}}</option>
+                            <option>Teléfono: {{verbalList.aprentice.phoneNumber}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>Situación</label>
+                    <div>
+                        <textarea class="form-control" name="situation" id="doc" formControlName="situation" cols="40"
+                            rows="5" placeholder="Situacion a corregir" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <p>
+                    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Información presentada por al aprendiz
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        
+                        Causa de la situación:{{verbalList.summary}}
+                    </div>
+                </div>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        
+                        Impacto:{{verbalList.impact}}
+                    </div>
+                </div>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        
+                        Efecto:{{verbalList.effect}}
+                    </div>
+                </div>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        
+                        Compromiso:{{verbalList.commitment}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+
+                <textarea class="form-control" name="recovery" id="doc" formControlName="recovery" cols="40" rows="5"
+                    placeholder="Actividad de recuperacion"></textarea>
+                <div
+                    *ngIf="searchForm.get('recovery').invalid && (searchForm.get('recovery').dirty || searchForm.get('recovery').touched)">
+                    <div *ngIf="searchForm.get('recovery').errors.required">
+                        <p class="error">*El campo es requerido</p>
+                    </div>
+                    <div *ngIf="searchForm.get('recovery').errors.pattern">
+                        <p class="advice">*El formulario admite cualquier texto en castellano</p>
+                    </div>
+                    <div *ngIf="searchForm.get('recovery').errors.maxlength">
+                        <p class="error">*El campo no debe contener más de 300 caracteres.</p>
+                    </div>
+                    <div *ngIf="searchForm.get('recovery').errors.minlength">
+                        <p class="error">*El campo no debe contener menos de 5 caracteres</p>
+                    </div>
+
+                </div> <br>
+                <button class="btn btn-dark" [disabled]="searchForm.invalid" type="submit">Actualizar</button>
+            </div>
+        </form>
+        <p-confirmDialog #cd header="Confirmaciòn" icon="pi pi-exclamation-triangle">
+            <p-footer>
+                <button type="button" pButton icon="pi pi-times" label="Cancelar" class="ui-button-secondary"
+                    (click)="cd.reject()"></button>
+                <button type="button" pButton icon="pi pi-check" label="Confirmar" class="ui-button-secondary"
+                    (click)="cd.accept()"></button>
+            </p-footer>
+        </p-confirmDialog>
+
+    </div>
+</div>
+<br>
+<br>
+<div class="d-flex justify-content-center" *ngIf="spinner">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden"></span>
+  </div>
+</div>
+<p-toast key="myKey1" position="center" [baseZIndex]="100"></p-toast>

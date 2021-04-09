@@ -1,0 +1,5 @@
+export const enum Authority {
+  INSTRUCTOR = 'ROLE_INSTRUCTOR',
+  ADMIN = 'ROLE_ADMIN',
+  APRENDIZ = 'ROLE_APPRENTICE',
+}

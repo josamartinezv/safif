@@ -1,0 +1,106 @@
+<div class="container" class="bg-succes row align-items-center justify-content-center">
+    <div class="card bg-light mb-0" style="max-width: 120rem; width: 30%;">
+        <div class="card-header">
+            <p class="h2 bg-succes row align-items-center justify-content-center">Visualización</p>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <div>
+            <form [formGroup]="searchForm">
+                <input class="form-control" type="hidden" formControlName="idUsers">
+
+                <p class="form-group col-md-12" style="text-align: center;" readonly>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Documento identificación</mat-label>
+                        <input matInput placeholder="Documento identificación" formControlName="documentNumber">
+                        <mat-icon matSuffix>badge</mat-icon>
+                        <mat-error *ngIf="searchForm.get('documentNumber').invalid && (searchForm.get('documentNumber').dirty || searchForm.get('documentNumber').touched)">
+                            <mat-error *ngIf="searchForm.get('documentNumber').errors.required">
+                                *El campo es <strong>requerido</strong>
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p class="form-group col-md-12" style="text-align: center;" readonly>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombre" formControlName="name">
+                        <mat-icon matSuffix>account_circle</mat-icon>
+                        <mat-error *ngIf="searchForm.get('name').invalid && (searchForm.get('name').dirty || searchForm.get('name').touched)">
+                            <mat-error *ngIf="searchForm.get('name').errors.required">
+                                *El campo es <strong>requerido</strong>
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p class="form-group col-md-12" style="text-align: center;" readonly>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput placeholder="Apellido" formControlName="lastName">
+                        <mat-icon matSuffix>account_circle</mat-icon>
+                        <mat-error *ngIf="searchForm.get('lastName').invalid && (searchForm.get('lastName').dirty || searchForm.get('lastName').touched)">
+                            <mat-error *ngIf="searchForm.get('lastName').errors.required">
+                                *El campo es <strong>requerido</strong>
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p class="form-group col-md-12" style="text-align: center; " readonly>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngIf="searchForm.get('email').invalid && (searchForm.get('email').dirty || searchForm.get('email').touched)">
+                            <mat-error *ngIf="searchForm.get('email').errors.required">
+                                *El campo es <strong>requerido</strong>
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p class="form-group col-md-12" style="text-align: center;" readonly>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email SENA</mat-label>
+                        <input matInput placeholder="Email Sena" formControlName="emailSena">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngIf="searchForm.get('emailSena').invalid && (searchForm.get('emailSena').dirty || searchForm.get('emailSena').touched)">
+                            <mat-error *ngIf="searchForm.get('emailSena').errors.required">
+                                *El campo es <strong>requerido</strong>
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <div class="form-group col-md-12" style="text-align: center;">
+                    <p>
+                        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Roles Asociados
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample" *ngFor="let item of users.rols">
+                        <div class="card card-body">
+                            {{ item.description }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12" style="text-align: center;" hidden>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Asignar roles</mat-label>
+                        <mat-select multiple formControlName="rols">
+                            <mat-option *ngFor="let authority of rols" [value]="authority">{{authority.description}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+            <button mat-icon-button aria-label="Example icon button with a return" onclick="history.back()"><mat-icon>keyboard_return</mat-icon></button>
+
+
+        </div>
+    </div>
+    <br>

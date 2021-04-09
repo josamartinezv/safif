@@ -1,0 +1,209 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Padauk&display=swap" rel="stylesheet">
+<div class="container-fluid">
+
+    <div class="row ">
+        <div class="col">
+            <h1 class="fond-weight-bold text-center h1">Generar llamado atención verbal</h1>
+
+        </div>
+
+
+    </div>
+
+
+
+    <br>
+    <br>
+    <div class="row ">
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
+            <form [formGroup]="searchForm" (ngSubmit)="searchNumber()">
+
+                <i class="material-icons icon">fact_check</i>
+
+                <mat-form-field color="warn">
+                    <mat-label>Ficha Nº</mat-label>
+                    <input formControlName="number" type="text" autocomplete="off" matInput placeholder="Ficha Nº">
+                    <mat-hint>¡Este campo solo admite números!</mat-hint>
+
+                    <div class="noUser" *ngIf="noUser" role="alert">
+                        *Ficha <strong>inválida</strong>
+                    </div>
+                    <mat-error *ngIf="searchForm.get('number').invalid">
+                        <mat-error *ngIf="searchForm.get('number').errors.pattern">
+                            *El campo solo debe contener <strong>números</strong>
+                        </mat-error>
+                        <br>
+                        <mat-error *ngIf="searchForm.get('number').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+
+                        <button class="btn btn-link" type="submit" [disabled]="searchForm.invalid"></button>
+                    </mat-error>
+
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
+            <form [formGroup]="searchForm" (ngSubmit)="searchByDocumentNumber()">
+
+                <i class="material-icons icon">article</i>
+
+
+                <mat-form-field color="warn">
+                    <mat-label>Documento</mat-label>
+                    <input formControlName="documentNumber" type="text" autocomplete="off" matInput placeholder="Documento">
+                    <mat-hint>¡Este campo solo admite números!</mat-hint>
+
+                    <div class="noDocument" *ngIf="noDocument" role="alert">
+                        *Usuario <strong>inválido</strong>
+                    </div>
+                    <mat-error *ngIf="searchForm.get('documentNumber').invalid">
+                        <mat-error *ngIf="searchForm.get('documentNumber').errors.pattern">
+                            *El campo solo debe contener <strong>números</strong>
+                        </mat-error>
+                        <br>
+                        <mat-error *ngIf="searchForm.get('documentNumber').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+
+
+                        <button class="btn btn-link" type="submit" [disabled]="searchForm.invalid"></button>
+
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<br>
+<div class="row">
+    <div class="col text-center">
+        <div *ngIf="usersprogramList.length > 0">
+            <!-- {{usersprogramList | json}} -->
+
+            <div class="table-responsive">
+                <table class="table" class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!--<th scope="col">ID</th>-->
+                            <th scope="col">Ficha</th>
+                            <th scope="col">Documento de identidad</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Email Sena</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Nuevo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of usersprogramList">
+                            <!--<td >{{item.idUser}}</td> -->
+                            <td>{{item.number}}</td>
+                            <td>{{item.documentNumber}}</td>
+                            <td>{{item.fullName}}</td>
+                            <td>{{item.emailSena}}</td>
+                            <td>{{item.phoneNumber}}</td>
+                            <td><button mat-icon-button [routerLink]="['../verbal-create',item.idUser]">
+                                    <mat-icon>add_circle</mat-icon>
+                                </button>
+                            </td>
+                            <!-- <button [routerLink]="['../verbal-create',items.idApprentice.idUser]"> + </button> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPagenation($event)"></p-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center">
+        <div *ngIf="verbalList.length > 0">
+            <!-- {{usersprogramList | json}} -->
+            <br>
+            <br>
+            <br>
+
+            <div class="row ">
+                <div class="col">
+                    <h1 class="fond-weight-bold text-center h1">llamados de atención verbal</h1>
+
+                </div>
+            </div>
+            <div *ngIf="noVerbal" class="row ">
+                <div class="col">
+                    <h1 class="fond-weight-bold text-center h1">El aprendiz no tiene llamados de atención</h1>
+
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div class="table-responsive">
+                <table class="table" class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Ficha</th>
+                            <th scope="col">Documento Aprendiz</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Tramite de solicitud</th>
+                            <th scope="col">Fase proyecto</th>
+                            <th scope="col">Tipo de llamado</th>
+                            <!-- <th scope="col">Documento Instructor</th> -->
+                            <th scope="col">Instructor</th>
+                            <th scope="col">Visualizar</th>
+                            <th scope="col">Estado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of verbalList">
+                            <td>{{item.programNumber.number}}</td>
+                            <td>{{item.aprentice.documentNumber}}</td>
+                            <td>{{item.aprentice.detailUser.name}} {{item.aprentice.detailUser.lastName}}</td>
+                            <td>{{item.dateCalled | date:'dd/MMM/yy h:mm:ss a'}}</td>
+                            <td>
+                                <span *ngIf="item.procedure">No Diligenciado</span>
+                                <span *ngIf="!item.procedure">Diligenciado</span>
+                            </td>
+                            <td>{{item.phaseVerbalCalled}}</td>
+                            <td>{{item.typeVerbalCalled}}</td>
+                            <!-- <td>{{item.documentNumberInstructor}}</td> -->
+                            <td>{{item.instructor.detailUser.name}} {{item.instructor.detailUser.lastName}}</td>
+                            <td>
+                                <button *ngIf="item.state" mat-icon-button aria-label="Example icon button with a eye" [routerLink]="['../verbal-a-view',item.idVerbalCalled]" [disabled]="item.state"><mat-icon>visibility_off</mat-icon></button>
+                                <button *ngIf="!item.state" mat-icon-button aria-label="Example icon button with a eye" [routerLink]="['../verbal-a-view',item.idVerbalCalled]" [disabled]="item.state"><mat-icon>visibility</mat-icon></button>
+                            </td>
+                            <td>
+                                <span *ngIf="item.state"><mat-icon>lock_open</mat-icon></span>
+                                <span *ngIf="!item.state"><mat-icon>lock</mat-icon></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="loadPagenation($event)"></p-paginator>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

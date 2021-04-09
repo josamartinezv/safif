@@ -1,0 +1,166 @@
+<div class="container" class="bg-succes row align-items-center justify-content-center">
+
+    <div class="card bg-light mb-0" style="max-width: 40rem;">
+        <div class="card-header">
+            <p class="h2">Modificar llamado de atención</p>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <div>
+            <form [formGroup]="searchForm" (ngSubmit)="confirm()">
+                <input type="hidden" formControlName="idVerbalCalled">
+
+                <div *ngIf="verbalList">
+
+                    <div class="form-group col-md-12" hidden>
+                        <div *ngIf="verbalList">
+                            <label>Información Instructor</label>
+                            <select class="custom-select" multiple disabled>
+                                <option>Nombres: {{verbalList.instructor.name}} {{verbalList.instructor.lastName}}
+                                </option>
+                                <option>Documento: {{verbalList.instructor.documentNumber}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12" hidden>
+                        <div *ngIf="verbalList">
+                            <label>Mis datos</label>
+                            <select class="custom-select" multiple disabled>
+                                <option>Nombres: {{verbalList.aprentice.name}} {{verbalList.aprentice.lastName}}
+                                </option>
+                                <option>Documento: {{verbalList.aprentice.documentNumber}}</option>
+                                <option>Ficha: {{verbalList.programNumber.number}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div *ngIf="verbalList">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Situación a corregir
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Descripción detallada
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p> {{verbalList.situation}}</p>
+                        </mat-expansion-panel>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group col-md-12">
+                    <mat-hint>Este campo es obligatorio!</mat-hint>
+                    <textarea #input maxlength="250" class="form-control hj" name="" id="" cols="40" rows="5" placeholder="Resumen de la causa de la situacion" formControlName="summary"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                    <mat-error *ngIf="searchForm.get('summary').invalid && (searchForm.get('summary').dirty || searchForm.get('summary').touched)">
+                        <mat-error *ngIf="searchForm.get('summary').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('summary').errors.pattern">
+                            *El campo solo debe admitir los <strong>signos de puntuación y palabras propias del castellano</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('summary').errors.maxlength">
+                            *El campo no debe contener mas de 300 caracteres.
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('summary').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+                    </mat-error>
+
+                </div>
+
+
+                <div class="form-group col-md-12">
+                    <mat-hint>Este campo es obligatorio!</mat-hint>
+                    <textarea #input maxlength="250" class="form-control" name="" id="" cols="40" rows="5" placeholder="Impacto" formControlName="impact"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                    <mat-error *ngIf="searchForm.get('impact').invalid && (searchForm.get('impact').dirty || searchForm.get('impact').touched)">
+                        <mat-error *ngIf="searchForm.get('impact').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('impact').errors.pattern">
+                            *El campo solo debe admitir los <strong>signos de puntuación y palabras propias del castellano</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('impact').errors.maxlength">
+                            *El campo no debe contener mas de 250 caracteres.
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('impact').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+                    </mat-error>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <mat-hint>Este campo es obligatorio!</mat-hint>
+                    <textarea #input maxlength="250" class="form-control" name="" id="" cols="40" rows="5" placeholder="Efecto" formControlName="effect"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                    <mat-error *ngIf="searchForm.get('effect').invalid && (searchForm.get('effect').dirty || searchForm.get('effect').touched)">
+                        <mat-error *ngIf="searchForm.get('effect').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('effect').errors.pattern">
+                            *El campo solo debe admitir los <strong>signos de puntuación y palabras propias del castellano</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('effect').errors.maxlength">
+                            *El campo no debe contener mas de 250 caracteres.
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('effect').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+                    </mat-error>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <mat-hint>Este campo es obligatorio!</mat-hint>
+                    <textarea #input maxlength="250" class="form-control" name="" id="" cols="40" rows="5" placeholder="Compromiso adquirido por el aprendiz" formControlName="commitment"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                    <mat-error *ngIf="searchForm.get('commitment').invalid && (searchForm.get('commitment').dirty || searchForm.get('commitment').touched)">
+                        <mat-error *ngIf="searchForm.get('commitment').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('commitment').errors.pattern">
+                            *El campo solo debe admitir los <strong>signos de puntuación y palabras propias del castellano</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('commitment').errors.maxlength">
+                            *El campo no debe contener mas de 250 caracteres.
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('commitment').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+
+
+                    </mat-error><br>
+
+                    <button mat-raised-button [disabled]="searchForm.invalid">Actualizar</button>
+
+                </div>
+
+
+
+            </form>
+            <p-confirmDialog #cd header="Confirmación" icon="pi pi-exclamation-triangle">
+                <p-footer>
+                    <button type="button" pButton icon="pi pi-times" label="Cancelar" class="ui-button-secondary" (click)="cd.reject()"></button>
+                    <button type="button" pButton icon="pi pi-check" label="Confirmar" class="ui-button-secondary" (click)="cd.accept()"></button>
+                </p-footer>
+            </p-confirmDialog>
+
+            <button mat-icon-button aria-label="Example icon button with a return" onclick="history.back()"><mat-icon>keyboard_return</mat-icon></button>
+
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="d-flex justify-content-center" *ngIf="spinner">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden"></span>
+  </div>
+</div>
+<p-toast key="myKey1" position="center" [baseZIndex]="100"></p-toast>

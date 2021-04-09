@@ -1,0 +1,92 @@
+<div class="container" class="bg-succes row align-items-center justify-content-center">
+    <div class="card bg-light mb-3" style="max-width: 30rem;">
+        <div class="card-header">Modificar llamado de atencion</div>
+        <div>
+            <form [formGroup]="searchForm">
+                <input type="hidden" formControlName="idVerbalCalled">
+
+                <div *ngIf="verbalList">
+                    <div class="form-group col-md-12">
+                        <div *ngIf="verbalList">
+                            <label>Información Instructor</label>
+                            <select class="custom-select" multiple disabled>
+                                <option>Nombre: {{verbalList.instructor.name}} {{verbalList.instructor.lastName}}
+                                </option>
+                                <option>Documento: {{verbalList.instructor.documentNumber}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div *ngIf="verbalList">
+                            <label>Mis datos</label>
+                            <select class="custom-select" multiple disabled>
+                                <option>Nombres: {{verbalList.aprentice.name}} {{verbalList.aprentice.lastName}}
+                                </option>
+                                <option>Documento: {{verbalList.aprentice.documentNumber}}</option>
+                                <option>Ficha: {{verbalList.programNumber.number}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div *ngIf="verbalList">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Situación a corregir
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Descripción detallada
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p> {{verbalList.situation}}</p>
+                        </mat-expansion-panel>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-12">
+                    <label>Resumen de la cuasa de la situación</label>
+                    <textarea class="form-control" name="" id="" cols="40" rows="5"
+                        placeholder="Resumen de la causa de la situacion" formControlName="summary" readonly></textarea>
+                    
+                </div>
+
+
+                
+                <div class="form-group col-md-12">
+                    <label>Impacto</label>
+                    <textarea class="form-control" name="" id="" cols="40" rows="5" placeholder="Impacto"
+                        formControlName="impact" readonly></textarea>
+            
+                </div>
+
+                
+                <div class="form-group col-md-12">
+                    <label>Efecto</label>
+                    <textarea class="form-control" name="" id="" cols="40" rows="5" placeholder="Efecto"
+                        formControlName="effect" readonly></textarea>
+                   
+                </div>
+
+                
+                <div class="form-group col-md-12">
+                    <label>Compromiso adquirido por el aprendiz</label>
+                    <textarea class="form-control" name="" id="" cols="40" rows="5"
+                        placeholder="Compromiso adquirido por el aprendiz" formControlName="commitment" readonly></textarea>
+                   <br>
+
+                        
+                </div>
+
+                
+                <button mat-icon-button aria-label="Example icon button with a return" onclick="history.back()"><mat-icon>keyboard_return</mat-icon></button>
+
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>

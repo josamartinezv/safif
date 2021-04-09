@@ -1,0 +1,89 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="isActiveAside">
+        
+        <h3><p>Hola, <b> {{getFullName()}}</b></p></h3>
+
+        <div class="title">
+            <mat-icon class="icon_title">mood</mat-icon>
+            
+            <div class="title_1">Bienvenido a SAFI</div>
+           
+        </div>
+        <!--  Change of roles    -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Rol</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+          <option  *ngFor="let authorities of authorities">{{authorities}}</option>
+
+        </select>
+        </div>
+        <div class="subtitle">
+            <mat-icon class="icon_subtitle">search</mat-icon>
+            <div class="subtitle_1">Comité de evaluación</div>
+        </div>
+        <mat-nav-list>
+            <a *appHasAnyAuthority="['ROLE_INSTRUCTOR']">
+                <p class="title_2" *ngIf="instructor">Instructor</p>
+                <a mat-list-item class="text_menu" *ngIf="instructor" [routerLink]="['../dashboard/verbal/verbal-list']">
+                    <mat-icon mat-list-icon class="icon_menu">add_circle</mat-icon>Crear llamado de atención</a>
+                <a mat-list-item class="text_menu" *ngIf="instructor" [routerLink]="['../dashboard/verbal/verbal-view']">
+                    <mat-icon mat-list-icon class="icon_menu">create</mat-icon>Modificar llamado de atención</a>
+
+                    <button  class="btn btn-outline-secondary btn-lg btn-block"
+                        type="submit" (click)="download()"><mat-icon mat-list-icon class="icon_menu">file_download
+
+                    </mat-icon>Descargar reporte</button>
+                    <br>
+                    <br>         
+                   
+            </a>
+
+                       
+            <mat-divider></mat-divider>
+            <a *appHasAnyAuthority="['ROLE_APPRENTICE']">
+                <p class="title_2" *ngIf="aprendiz">Aprendiz</p>
+                <a mat-list-item class="text_menu" *ngIf="aprendiz" [routerLink]="['../dashboard/verbal/verbal-a-list']">
+                    <mat-icon mat-list-icon class="icon_menu">create</mat-icon>Modificar llamado de atención</a>
+            </a>
+            
+            <a mat-list-item class="text_menu" [routerLink]="['../dashboard/handbook']">
+                <mat-icon mat-list-icon class="icon_menu">contact_support</mat-icon>Manual de usuario</a>
+
+                <mat-divider></mat-divider>    
+            <div class="subtitle" *appHasAnyAuthority="['ROLE_ADMIN']">
+                <p class="title_2" *ngIf="admin">Administrador</p>
+                <div *ngIf="admin">
+                    <mat-icon mat-list-item class="icon_menu">manage_accounts</mat-icon>
+                    <p class="title_2">Gestión de usuarios</p>
+                    <a>
+                        <a mat-list-item class="text_menu" [routerLink]="['../dashboard/users/users-list']">
+                            <mat-icon mat-list-icon class="icon_menu">create</mat-icon>Asignación de roles</a>
+                    </a>
+                    
+                </div>
+
+            </div>
+            <mat-divider></mat-divider>
+
+            <a mat-list-item (click)="cerrarSesion()">
+                <mat-icon mat-list-icon>exit_to_app</mat-icon>Salida segura</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="d-block d-sm-block d-md-none">
+            <div class="collapse text-right" id="collapseExample">
+                <a class="icon" href="https://www.sena.edu.co/es-co/Paginas/default.aspx">
+                    <i class="fab fa-google-plus-square fab1"></i></a>
+                <a class="icon" href="https://twitter.com/SENAComunica">
+                    <i class="fab fa-twitter-square fab2"></i></a>
+                <a class="icon" href="https://www.facebook.com/SENA/">
+                    <i class="fab fa-facebook-square fab3"></i></a>
+                <a class="icon" href="https://www.instagram.com/senacomunica/">
+                    <i class="fab fa-instagram-square fab4"></i></a>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,122 @@
+<!-- name = No es necesario para el service-->
+<!-- formControlName = Ayuda a capturar los datos del formulario-->
+<!-- [formGroup] se debe importar en el module de cada modulo -->
+
+<div class="container" class="bg-succes row align-items-center justify-content-center">
+
+    <div class="card bg-light mb-0" style="max-width: 120rem;">
+        <div class="card-header">
+            <p class="h2">Crear llamado de atención</p>
+        </div>
+    <div>
+
+            <div class="form-group col-md-12">
+                <div *ngIf="aprendiz">
+                    <label>Información Aprendiz</label>
+                    <select class="custom-select" multiple disabled>
+                        <option>Nombre: {{aprendiz.fullName}}</option>
+                        <option>Cédula: {{aprendiz.users.documentNumber}}</option>
+                        <option>Ficha: {{aprendiz.programNumber.number}}</option>
+                        <option>Email SENA: {{aprendiz.users.emailSena}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <form [formGroup]="searchForm" (click)="searchTypeCalled()">
+                <!-- <form [formGroup]="searchForm" (click)="searchTypeCalled()"> -->
+                <div class="form-group col-md-12">
+                    <label> Tipo</label>
+                    <br>
+                    <mat-hint>Este campo es obligatorio</mat-hint>
+                    <select class="form-control" name="" formControlName="typeVerbalCalled">
+                        <option value="academic">Academico</option>
+                        <option value="attitudinal">Actitudinal</option>
+                    </select>
+                    <mat-error *ngIf="searchForm.get('typeVerbalCalled').invalid && (searchForm.get('typeVerbalCalled').dirty ||searchForm.get('typeVerbalCalled').touched) ">
+                        <mat-error *ngIf="searchForm.get('typeVerbalCalled').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                    </mat-error>
+                </div>
+
+            </form>
+        </div>
+
+
+        <div>
+            <form [formGroup]="searchForm" (click)="phaseVerbalCalled()">
+                <!-- <form [formGroup]="searchForm" (click)="searchTypeCalled()"> -->
+                <div class="form-group col-md-12">
+                    <label> Fases</label>
+                    <br>
+                    <mat-hint>Este campo es obligatorio</mat-hint>
+                    <select class="form-control" name="" formControlName="phaseVerbalCalled">
+                        <option value="analysis">Análisis</option>
+                        <option value="planning">Planeación</option>
+                        <option value="execution">Ejecución</option>
+                        <option value="evaluation">Evaluación</option>
+                    </select>
+                    <mat-error *ngIf="searchForm.get('phaseVerbalCalled').invalid && (searchForm.get('phaseVerbalCalled').dirty ||searchForm.get('phaseVerbalCalled').touched) ">
+                        <mat-error *ngIf="searchForm.get('phaseVerbalCalled').errors.required">
+                                *El campo es <strong>requerido</strong>
+                        </mat-error>
+                    </mat-error>
+                </div>
+
+            </form>
+        </div>
+
+        <div>
+            <form [formGroup]="searchForm" (ngSubmit)="confirm()">
+
+                <div class="form-group col-md-12">
+                    <textarea #input class="form-control" maxlength="250" name="Situation " id="doc" formControlName="situation" cols="60" rows="5" placeholder="Situacion a corregir"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                    <mat-error *ngIf="searchForm.get('situation').invalid && (searchForm.get('situation').dirty || searchForm.get('situation').touched)">
+                        <mat-error *ngIf="searchForm.get('situation').errors.required">
+                            *El campo es <strong>requerido</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('situation').errors.pattern">
+                            *El campo solo debe admitir los <strong>signos de puntuación y palabras propias del castellano</strong>
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('situation').errors.maxlength">
+                            *El campo no debe contener mas de 250 caracteres
+                        </mat-error>
+                        <mat-error *ngIf="searchForm.get('situation').errors.minlength">
+                            *El campo <strong>no puede</strong> contener menos de 5 caracteres
+                        </mat-error>
+                    </mat-error>
+                    <br>
+                    <button  mat-raised-button type="submit" [disabled]="searchForm.invalid">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <p-confirmDialog #cd header="Confirmación" icon="pi pi-exclamation-triangle">
+        <p-footer>
+            <button type="button" pButton icon="pi pi-times" label="Cancelar" class="ui-button-secondary" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Confirmar" class="ui-button-secondary" (click)="cd.accept()"></button>
+        
+        </p-footer>
+    </p-confirmDialog>
+   
+   
+</div>
+<br>
+<br>
+<div class="d-flex justify-content-center" *ngIf="spinner">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden"></span>
+  </div>
+</div>
+
+<!--<div class="" *ngIf="anuncio">-->
+    <!--<div>-->
+<p-toast key="myKey1" position="center" [baseZIndex]="100"></p-toast>
+  <!--  </div>-->
+<!--</div>-->
